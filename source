@@ -1,0 +1,70 @@
+/////////////////////////////////////////////////////////////////
+//Author: Dominic Cirelli
+/////////////////////////////////////////////////////////////////
+// Lab 10
+/////////////////////////////////////////////////////////////////
+
+#include "stdafx.h"
+#include <conio.h>
+#include <process.h>
+#include "c:\LccMetalBox\LccIo.cpp"
+#define Max_Len 150
+#define IP_Len 14
+void recvThread(void *);
+
+int main()
+{
+	char Choice[Max_Len];
+	char Input[Max_Len];
+	char IP [IP_Len];
+	int Def = 1;
+	fseek(stdin, 0, 0);
+	
+	_beginthread(recvThread, 0, NULL);
+	
+	while (1)
+	{
+		printf("1) Enter Target IP address\n");
+		printf("2) Enter Text message to send\n");
+		printf("3) Send Text message\n");
+		printf("4) Exit\n");
+		gets_s(Choice);
+		if (strstr(Choice, "1") != NULL)
+		{
+			printf("Please enter Target IP Address\n");
+			gets_s(IP);
+			LccOutportString(0x2300, IP);
+			LccOutport(0x2500, Def);
+		}
+		if (strstr(Choice, "2") != NULL)
+		{
+			printf("Enter a message no longer than 150 characters\n");
+			gets_s(Input);
+			LccOutportString(0x2600, Input);
+		}
+		if (strstr(Choice, "3") != NULL)
+		{
+			LccOutport(0x2700, Def);
+		}
+		if (strstr(Choice, "4") != NULL)
+		{
+			break;
+		}
+	}
+}
+
+void recvThread(void *)
+{
+	char txt_in[Max_Len];
+	
+	while (1)
+	{
+		if (LccInport(0x2800) == 1)
+		{
+			printf("Text Recieved\n");
+			LccInportString(0x2900, txt_in);
+			printf("%s\n", txt_in);
+		}
+
+	}
+}
