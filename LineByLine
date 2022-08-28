@@ -1,0 +1,28 @@
+7-10 includes statements vital to operation of the program
+11-12 uses static definitions to use less memory and less magic numbers
+13 prototype of thread
+17-20 declaration of variables
+21 clears all arrays
+23 opens a new thread to keep 2 processes active
+25 indefinitly loops
+27-30 instructions to user
+31 takes user input and stores in choice
+32 compares choice to string 1
+34 prints it's contents
+35 takes input into variable IP
+36 writes IP to memory
+37 stores IP in memory
+39 compares choice to 2
+41 prints instructions
+42 stores information in input
+43 stores a message in memory
+45 comares choice to 3
+47 sends message stored in memory
+49 compares choice to 4
+51 breaks the loop and ends the program
+58 declartion of variable
+60 runs indefinitly
+62 compares memory address to 1
+64 notifys user of a message
+65 sores message in variable
+66 prints variable
